@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Oslo Tekniske Skole</title>
+    <title>Admin Panel - Oslo Technical School</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
         import { getDatabase, ref, push, set, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js';
-
+        
         // Firebase configuration - REPLACE WITH YOUR CONFIG
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyArWEGdNkRtiY1SsJSuEduHCLGYkRT4N4E",
             authDomain: "site-schoole-news.firebaseapp.com",
@@ -25,11 +24,9 @@
             measurementId: "G-WQV5N2DVD8"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-
-        // Make Firebase available globally
+        
         window.firebaseApp = app;
         window.firebaseDatabase = database;
         window.firebaseRef = ref;
@@ -38,8 +35,7 @@
         window.firebaseOnValue = onValue;
         window.firebaseRemove = remove;
     </script>
-
-    <style>
+        <style>
         * {
             margin: 0;
             padding: 0;
@@ -510,21 +506,20 @@
             animation: fadeInUp 0.6s ease-out;
         }
     </style>
+    <!-- Same CSS styles as before, just translated text content -->
 </head>
 <body>
-    <!-- Connection Status -->
     <div id="connection-status" class="connection-status">
-        <span id="status-text">Kobler til Firebase...</span>
+        <span id="status-text">Connecting to Firebase...</span>
     </div>
 
-    <!-- Admin Header -->
     <header class="admin-header">
         <div class="header-container">
             <div class="admin-logo">
                 <i class="fas fa-cog"></i>
                 <div>
                     <div class="admin-title">Admin Panel</div>
-                    <div class="admin-subtitle">Oslo Tekniske Skole - SkoleConnect</div>
+                    <div class="admin-subtitle">Oslo Technical School - SchoolConnect</div>
                 </div>
             </div>
 
@@ -532,119 +527,112 @@
                 <div class="user-avatar">AD</div>
                 <div class="user-info">
                     <h3>Admin</h3>
-                    <span>Skole Administrator</span>
+                    <span>School Administrator</span>
                 </div>
-                <a href="index_updated.html" class="back-btn">
+                <a href="index_english.html" class="back-btn">
                     <i class="fas fa-arrow-left"></i>
-                    Tilbake til Skolen
+                    Back to School
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="admin-main">
-        <!-- News Form -->
         <section class="news-form-section">
             <h2 class="section-title">
                 <i class="fas fa-plus-circle"></i>
-                Legg til Ny Nyhet
+                Add New News
             </h2>
 
             <div id="message-container"></div>
 
             <form id="news-form">
                 <div class="form-group">
-                    <label class="form-label">Tittel</label>
+                    <label class="form-label">Title</label>
                     <input 
                         type="text" 
                         class="form-input" 
                         id="news-title" 
-                        placeholder="F.eks: Ny VR-lab åpnet på skolen"
+                        placeholder="E.g: New VR lab opened at school"
                         required
                     >
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Kategori</label>
+                    <label class="form-label">Category</label>
                     <select class="form-select" id="news-category" required>
-                        <option value="">Velg kategori</option>
-                        <option value="Utdanning">📚 Utdanning</option>
-                        <option value="Teknologi">💻 Teknologi</option>
-                        <option value="Sport">⚽ Sport</option>
-                        <option value="Kultur">🎨 Kultur</option>
-                        <option value="Arrangement">📅 Arrangement</option>
-                        <option value="Partnerskap">🤝 Partnerskap</option>
-                        <option value="Viktig">⚠️ Viktig Informasjon</option>
+                        <option value="">Select category</option>
+                        <option value="Education">📚 Education</option>
+                        <option value="Technology">💻 Technology</option>
+                        <option value="Sports">⚽ Sports</option>
+                        <option value="Culture">🎨 Culture</option>
+                        <option value="Events">📅 Events</option>
+                        <option value="Partnership">🤝 Partnership</option>
+                        <option value="Important">⚠️ Important Information</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Forfatter</label>
+                    <label class="form-label">Author</label>
                     <input 
                         type="text" 
                         class="form-input" 
                         id="news-author" 
-                        placeholder="F.eks: Kari Nordmann"
+                        placeholder="E.g: John Smith"
                         required
                     >
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Innhold</label>
+                    <label class="form-label">Content</label>
                     <textarea 
                         class="form-textarea" 
                         id="news-content" 
-                        placeholder="Skriv hele nyheten her... Minimum 50 tegn."
+                        placeholder="Write the full news here... Minimum 50 characters."
                         required
                     ></textarea>
                 </div>
 
                 <button type="submit" class="submit-btn" id="submit-btn">
                     <i class="fas fa-paper-plane"></i>
-                    Publiser Nyhet
+                    Publish News
                 </button>
             </form>
         </section>
 
-        <!-- News List -->
         <section class="news-list-section">
             <h2 class="section-title">
                 <i class="fas fa-newspaper"></i>
-                Publiserte Nyheter
+                Published News
             </h2>
 
-            <!-- Stats -->
             <div class="news-stats">
                 <div class="stat-card">
                     <span class="stat-number" id="total-news">-</span>
-                    <span class="stat-label">Totale Nyheter</span>
+                    <span class="stat-label">Total News</span>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" id="today-news">-</span>
-                    <span class="stat-label">I dag</span>
+                    <span class="stat-label">Today</span>
                 </div>
                 <div class="stat-card">
                     <span class="stat-number" id="week-news">-</span>
-                    <span class="stat-label">Denne uken</span>
+                    <span class="stat-label">This Week</span>
                 </div>
             </div>
 
-            <!-- News List -->
             <div id="news-list">
                 <div class="loading">
                     <div class="spinner"></div>
-                    <p>Laster nyheter fra Firebase...</p>
+                    <p>Loading news from Firebase...</p>
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        // Firebase Connection Status
         let connectionStatus = false;
-
-        // Initialize admin panel when loaded
+        
         window.addEventListener('load', function() {
             setTimeout(() => {
                 initializeFirebase();
@@ -659,19 +647,19 @@
                     window.firebaseOnValue(connectedRef, (snapshot) => {
                         connectionStatus = snapshot.val() === true;
                         updateConnectionStatus();
-
+                        
                         if (connectionStatus) {
-                            console.log('✅ Firebase tilkoblet!');
+                            console.log('✅ Firebase connected!');
                         } else {
-                            console.log('❌ Firebase ikke tilkoblet');
+                            console.log('❌ Firebase not connected');
                         }
                     });
                 } else {
-                    console.log('❌ Firebase ikke konfigurert');
+                    console.log('❌ Firebase not configured');
                     updateConnectionStatus();
                 }
             } catch (error) {
-                console.error('❌ Firebase feil:', error);
+                console.error('❌ Firebase error:', error);
                 updateConnectionStatus();
             }
         }
@@ -679,16 +667,15 @@
         function updateConnectionStatus() {
             const statusElement = document.getElementById('connection-status');
             const statusText = document.getElementById('status-text');
-
+            
             if (connectionStatus) {
                 statusElement.className = 'connection-status show connected';
-                statusText.innerHTML = '<i class="fas fa-check-circle"></i> Firebase tilkoblet';
+                statusText.innerHTML = '<i class="fas fa-check-circle"></i> Firebase connected';
             } else {
                 statusElement.className = 'connection-status show disconnected';
-                statusText.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Firebase ikke tilkoblet';
+                statusText.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Firebase not connected';
             }
-
-            // Hide after 4 seconds if connected
+            
             if (connectionStatus) {
                 setTimeout(() => {
                     statusElement.classList.remove('show');
@@ -703,7 +690,7 @@
                 console.log('✅ Admin panel initialized successfully');
             } catch (error) {
                 console.error('❌ Error initializing admin:', error);
-                showMessage('Feil ved initialisering. Sjekk Firebase-konfigurasjonen.', 'error');
+                showMessage('Error during initialization. Check Firebase configuration.', 'error');
             }
         }
 
@@ -714,43 +701,38 @@
                 console.log('✅ Form handler attached successfully');
             } else {
                 console.error('❌ Form not found! Check HTML IDs');
-                showMessage('Form ikke funnet! Sjekk HTML struktur.', 'error');
+                showMessage('Form not found! Check HTML structure.', 'error');
             }
         }
 
-        // ИСПРАВЛЕННАЯ ФУНКЦИЯ handleFormSubmit
         async function handleFormSubmit(e) {
             e.preventDefault();
             console.log('📝 Form submitted, processing...');
-
+            
             const submitBtn = document.getElementById('submit-btn');
             const originalText = submitBtn.innerHTML;
-
+            
             try {
-                // Get form data - используем правильные ID элементов
                 const title = document.getElementById('news-title').value.trim();
                 const category = document.getElementById('news-category').value;
                 const author = document.getElementById('news-author').value.trim();
                 const content = document.getElementById('news-content').value.trim();
-
+                
                 console.log('📊 Form data:', { title, category, author, content: content.substring(0, 50) + '...' });
-
-                // Validation
+                
                 if (!title || !category || !author || !content) {
-                    showMessage('❌ Alle felter må fylles ut!', 'error');
+                    showMessage('❌ All fields must be filled out!', 'error');
                     return;
                 }
-
+                
                 if (content.length < 50) {
-                    showMessage('❌ Innholdet må være minst 50 tegn langt!', 'error');
+                    showMessage('❌ Content must be at least 50 characters long!', 'error');
                     return;
                 }
 
-                // Show loading state
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = '<div class="spinner" style="width:16px;height:16px;margin:0 8px 0 0;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;"></div> Publiserer...';
+                submitBtn.innerHTML = '<div class="spinner" style="width:16px;height:16px;margin:0 8px 0 0;border:2px solid rgba(0,0,0,0.3);border-top-color:#000;"></div> Publishing...';
 
-                // Create news object
                 const newsData = {
                     title: title,
                     content: content,
@@ -762,16 +744,13 @@
 
                 console.log('🔥 Publishing to Firebase:', newsData);
 
-                // Push to Firebase
                 const newsRef = window.firebaseRef(window.firebaseDatabase, 'news');
                 await window.firebasePush(newsRef, newsData);
 
                 console.log('✅ Successfully published to Firebase');
 
-                // Success
-                showMessage('✅ Nyheten ble publisert!', 'success');
-
-                // Reset form - ИСПРАВЛЕНО: получаем форму правильно
+                showMessage('✅ News has been published!', 'success');
+                
                 const newsForm = document.getElementById('news-form');
                 if (newsForm) {
                     newsForm.reset();
@@ -779,14 +758,13 @@
                 } else {
                     console.error('❌ Could not find form to reset');
                 }
-
-                loadNewsList(); // Refresh the list
+                
+                loadNewsList();
 
             } catch (error) {
                 console.error('❌ Error publishing news:', error);
-                showMessage('❌ Feil ved publisering: ' + error.message, 'error');
+                showMessage('❌ Publishing error: ' + error.message, 'error');
             } finally {
-                // Reset button
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
@@ -795,7 +773,7 @@
         function loadNewsList() {
             try {
                 const newsRef = window.firebaseRef(window.firebaseDatabase, 'news');
-
+                
                 window.firebaseOnValue(newsRef, (snapshot) => {
                     const data = snapshot.val();
                     displayNewsList(data);
@@ -805,8 +783,8 @@
                     document.getElementById('news-list').innerHTML = `
                         <div class="empty-state">
                             <i class="fas fa-exclamation-triangle"></i>
-                            <h3>Kunne ikke laste nyheter</h3>
-                            <p>Sjekk Firebase-tilkoblingen og prøv igjen.</p>
+                            <h3>Could not load news</h3>
+                            <p>Check Firebase connection and try again.</p>
                         </div>
                     `;
                 });
@@ -818,13 +796,13 @@
 
         function displayNewsList(newsData) {
             const container = document.getElementById('news-list');
-
+            
             if (!newsData) {
                 container.innerHTML = `
                     <div class="empty-state">
                         <i class="far fa-newspaper"></i>
-                        <h3>Ingen nyheter publisert enda</h3>
-                        <p>Bruk skjemaet til venstre for å publisere den første nyheten.</p>
+                        <h3>No news published yet</h3>
+                        <p>Use the form on the left to publish the first news.</p>
                     </div>
                 `;
                 return;
@@ -849,10 +827,10 @@
                     <p class="news-content">${news.content.substring(0, 200)}${news.content.length > 200 ? '...' : ''}</p>
                     <div class="news-actions">
                         <button class="edit-btn" onclick="editNews('${news.id}')">
-                            <i class="fas fa-edit"></i> Rediger
+                            <i class="fas fa-edit"></i> Edit
                         </button>
-                        <button class="delete-btn" onclick="deleteNews('${news.id}', '${news.title.replace(/'/g, "\'")}')">
-                            <i class="fas fa-trash"></i> Slett
+                        <button class="delete-btn" onclick="deleteNews('${news.id}', '${news.title.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
                 </article>
@@ -865,8 +843,8 @@
             const demoHTML = `
                 <div class="empty-state">
                     <i class="fas fa-database"></i>
-                    <h3>Firebase ikke konfigurert</h3>
-                    <p>For å bruke admin-panelet må du konfigurere Firebase. Se instruksjonene i README.md</p>
+                    <h3>Firebase not configured</h3>
+                    <p>To use the admin panel you need to configure Firebase. See instructions in README.md</p>
                 </div>
             `;
             document.getElementById('news-list').innerHTML = demoHTML;
@@ -895,23 +873,23 @@
         }
 
         async function deleteNews(newsId, newsTitle) {
-            if (!confirm(`Er du sikker på at du vil slette nyheten "${newsTitle}"?`)) {
+            if (!confirm(`Are you sure you want to delete the news "${newsTitle}"?`)) {
                 return;
             }
 
             try {
                 const newsRef = window.firebaseRef(window.firebaseDatabase, `news/${newsId}`);
                 await window.firebaseRemove(newsRef);
-                showMessage('✅ Nyheten ble slettet!', 'success');
+                showMessage('✅ News has been deleted!', 'success');
                 loadNewsList();
             } catch (error) {
                 console.error('Error deleting news:', error);
-                showMessage('❌ Feil ved sletting: ' + error.message, 'error');
+                showMessage('❌ Deletion error: ' + error.message, 'error');
             }
         }
 
         function editNews(newsId) {
-            alert('Rediger-funksjonen kommer i neste versjon! 🚧\n\nFor nå kan du slette og opprette på nytt.');
+            alert('Edit function coming in next version! 🚧\\n\\nFor now you can delete and create new.');
         }
 
         function showMessage(text, type) {
@@ -922,11 +900,10 @@
                 <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
                 ${text}
             `;
-
+            
             container.innerHTML = '';
             container.appendChild(message);
-
-            // Auto-remove after 5 seconds
+            
             setTimeout(() => {
                 if (message.parentNode) {
                     message.parentNode.removeChild(message);
@@ -942,100 +919,34 @@
             const hours = Math.floor(minutes / 60);
             const days = Math.floor(hours / 24);
 
-            if (minutes < 1) return 'Nå';
-            if (minutes < 60) return `${minutes} min siden`;
-            if (hours < 24) return `${hours} timer siden`;
-            if (days < 7) return `${days} dager siden`;
-
-            return date.toLocaleDateString('no-NO', { 
+            if (minutes < 1) return 'Now';
+            if (minutes < 60) return `${minutes} min ago`;
+            if (hours < 24) return `${hours} hours ago`;
+            if (days < 7) return `${days} days ago`;
+            
+            return date.toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
             });
         }
 
-        // Firebase Connection Test Functions
-        function testFirebaseConnection() {
-            console.log('🔥 Тестируем подключение к Firebase...');
-
-            try {
-                if (!window.firebaseApp) {
-                    console.error('❌ Firebase app не инициализирован');
-                    return false;
-                }
-                console.log('✅ Firebase app инициализирован');
-
-                if (!window.firebaseDatabase) {
-                    console.error('❌ Firebase database не доступен');
-                    return false;
-                }
-                console.log('✅ Firebase database объект создан');
-
-                const testRef = window.firebaseRef(window.firebaseDatabase, '.info/connected');
-
-                window.firebaseOnValue(testRef, (snapshot) => {
-                    if (snapshot.val() === true) {
-                        console.log('✅ ПОДКЛЮЧЕНИЕ К БАЗЕ ДАННЫХ УСПЕШНО!');
-                        console.log('🔥 Firebase Realtime Database работает');
-                        console.log('📊 Информация о подключении:');
-                        console.log('   - Проект ID:', window.firebaseApp.options.projectId);
-                        console.log('   - Database URL:', window.firebaseApp.options.databaseURL);
-                        console.log('   - Auth Domain:', window.firebaseApp.options.authDomain);
-                    } else {
-                        console.error('❌ НЕТ ПОДКЛЮЧЕНИЯ К БАЗЕ ДАННЫХ');
-                        console.error('🔧 Проверь интернет или конфигурацию Firebase');
-                    }
-                }, (error) => {
-                    console.error('❌ ОШИБКА ПОДКЛЮЧЕНИЯ К БАЗЕ ДАННЫХ:', error);
-                    console.error('🔧 Возможные причины:');
-                    console.error('   - Неправильный databaseURL в config');
-                    console.error('   - Проблемы с Security Rules');  
-                    console.error('   - Интернет соединение');
-                });
-
-                return true;
-
-            } catch (error) {
-                console.error('❌ КРИТИЧЕСКАЯ ОШИБКА FIREBASE:', error);
-                console.error('🔧 Проверь что Firebase правильно подключен');
-                return false;
-            }
-        }
-
-        // Auto test
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                console.log('🚀 Запускаем автоматический тест Firebase...');
-                testFirebaseConnection();
-            }, 2500);
-        });
-
-        // Manual test for console
-        window.testFirebase = function() {
-            console.clear();
-            console.log('🔄 Ручной тест Firebase подключения...');
-            testFirebaseConnection();
-        };
-
-        // Console welcome message
         console.log(`
     ╔══════════════════════════════════════════════════════╗
-    ║                ADMIN PANEL v2.1 FIXED               ║
-    ║           Oslo Tekniske Skole - SkoleConnect         ║
+    ║                ADMIN PANEL v2.1 ENGLISH             ║
+    ║           Oslo Technical School - SchoolConnect      ║
     ║                                                      ║
-    ║  🔧 Administrer skolenyheter                         ║
-    ║  📝 Publiser nye artikler                            ║
-    ║  📊 Se statistikk og analytics                       ║
-    ║  🔥 Real-time Firebase integrering                   ║
+    ║  🔧 Manage school news                               ║
+    ║  📝 Publish new articles                             ║
+    ║  📊 View statistics and analytics                    ║
+    ║  🔥 Real-time Firebase integration                   ║
     ║  📡 Live connection status                           ║
     ║  ✅ Form reset bug FIXED                             ║
     ║                                                      ║
-    ║  🇳🇴 Laget for norske skoler                         ║
-    ║  ⚪ Hvit minimalistisk design                        ║
+    ║  🇺🇸 Made for international schools                   ║
+    ║  ⚪ White minimalist design                          ║
     ╚══════════════════════════════════════════════════════╝
         `);
-        console.log('🎯 Kommandoer: testFirebase() - test tilkobling');
-        console.log('✅ Form reset bug er nå fikset!');
     </script>
 </body>
 </html>
