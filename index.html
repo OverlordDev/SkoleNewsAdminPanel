@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Oslo Technical School</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDKs -->
+    <title>Admin Panel - Gjermundnes vidaregåande skule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
         import { getDatabase, ref, push, set, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js';
-        
+
         // Firebase configuration - REPLACE WITH YOUR CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyArWEGdNkRtiY1SsJSuEduHCLGYkRT4N4E",
@@ -26,7 +25,7 @@
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-        
+
         window.firebaseApp = app;
         window.firebaseDatabase = database;
         window.firebaseRef = ref;
@@ -35,7 +34,8 @@
         window.firebaseOnValue = onValue;
         window.firebaseRemove = remove;
     </script>
-        <style>
+
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -506,133 +506,120 @@
             animation: fadeInUp 0.6s ease-out;
         }
     </style>
-    <!-- Same CSS styles as before, just translated text content -->
 </head>
 <body>
+    <!-- Connection Status -->
     <div id="connection-status" class="connection-status">
-        <span id="status-text">Connecting to Firebase...</span>
+        <div id="status-text">Connecting to Firebase...</div>
     </div>
 
+    <!-- Admin Header -->
     <header class="admin-header">
         <div class="header-container">
             <div class="admin-logo">
-                <i class="fas fa-cog"></i>
+                <i class="fas fa-shield-alt"></i>
                 <div>
-                    <div class="admin-title">Admin Panel</div>
-                    <div class="admin-subtitle">Oslo Technical School - SchoolConnect</div>
+                    <h1 class="admin-title">Admin Panel</h1>
+                    <p class="admin-subtitle">Gjermundnes vidaregåande skule - SchoolConnect</p>
                 </div>
             </div>
 
             <div class="admin-user">
                 <div class="user-avatar">AD</div>
                 <div class="user-info">
-                    <h3>Admin</h3>
+                    <h3>Administrator</h3>
                     <span>School Administrator</span>
                 </div>
-                <a href="index_english.html" class="back-btn">
+                <a href="index.html" class="back-btn">
                     <i class="fas fa-arrow-left"></i>
-                    Back to School
+                    Back to School Website
                 </a>
             </div>
         </div>
     </header>
 
+    <!-- Admin Main Content -->
     <main class="admin-main">
+        <!-- News Form Section -->
         <section class="news-form-section">
             <h2 class="section-title">
                 <i class="fas fa-plus-circle"></i>
-                Add New News
+                Add New Article
             </h2>
 
             <div id="message-container"></div>
 
             <form id="news-form">
                 <div class="form-group">
-                    <label class="form-label">Title</label>
-                    <input 
-                        type="text" 
-                        class="form-input" 
-                        id="news-title" 
-                        placeholder="E.g: New VR lab opened at school"
-                        required
-                    >
+                    <label for="news-title" class="form-label">Article Title</label>
+                    <input type="text" id="news-title" class="form-input" placeholder="Enter article title" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Category</label>
-                    <select class="form-select" id="news-category" required>
+                    <label for="news-category" class="form-label">Category</label>
+                    <select id="news-category" class="form-select" required>
                         <option value="">Select category</option>
-                        <option value="Education">📚 Education</option>
-                        <option value="Technology">💻 Technology</option>
-                        <option value="Sports">⚽ Sports</option>
-                        <option value="Culture">🎨 Culture</option>
-                        <option value="Events">📅 Events</option>
-                        <option value="Partnership">🤝 Partnership</option>
-                        <option value="Important">⚠️ Important Information</option>
+                        <option value="📚 Education">📚 Education</option>
+                        <option value="💻 Technology">💻 Technology</option>
+                        <option value="⚽ Sports">⚽ Sports</option>
+                        <option value="🎨 Culture">🎨 Culture</option>
+                        <option value="📅 Events">📅 Events</option>
+                        <option value="🤝 Partnership">🤝 Partnership</option>
+                        <option value="⚠️ Important News">⚠️ Important News</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Author</label>
-                    <input 
-                        type="text" 
-                        class="form-input" 
-                        id="news-author" 
-                        placeholder="E.g: John Smith"
-                        required
-                    >
+                    <label for="news-author" class="form-label">Author</label>
+                    <input type="text" id="news-author" class="form-input" placeholder="Author name" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Content</label>
-                    <textarea 
-                        class="form-textarea" 
-                        id="news-content" 
-                        placeholder="Write the full news here... Minimum 50 characters."
-                        required
-                    ></textarea>
+                    <label for="news-content" class="form-label">Article Content</label>
+                    <textarea id="news-content" class="form-textarea" placeholder="Write the full article content here..." required></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submit-btn">
+                <button type="submit" id="submit-btn" class="submit-btn">
                     <i class="fas fa-paper-plane"></i>
-                    Publish News
+                    Publish Article
                 </button>
             </form>
         </section>
 
+        <!-- News List Section -->
         <section class="news-list-section">
             <h2 class="section-title">
                 <i class="fas fa-newspaper"></i>
-                Published News
+                Published Articles
             </h2>
 
+            <!-- Statistics -->
             <div class="news-stats">
                 <div class="stat-card">
-                    <span class="stat-number" id="total-news">-</span>
-                    <span class="stat-label">Total News</span>
+                    <span id="total-news" class="stat-number">0</span>
+                    <div class="stat-label">Total Articles</div>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number" id="today-news">-</span>
-                    <span class="stat-label">Today</span>
+                    <span id="today-news" class="stat-number">0</span>
+                    <div class="stat-label">Today</div>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number" id="week-news">-</span>
-                    <span class="stat-label">This Week</span>
+                    <span id="week-news" class="stat-number">0</span>
+                    <div class="stat-label">This Week</div>
                 </div>
             </div>
 
-            <div id="news-list">
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Loading news from Firebase...</p>
-                </div>
+            <!-- News List -->
+            <div id="news-list" class="loading">
+                <div class="spinner"></div>
+                <p>Loading articles from Firebase...</p>
             </div>
         </section>
     </main>
 
     <script>
         let connectionStatus = false;
-        
+
         window.addEventListener('load', function() {
             setTimeout(() => {
                 initializeFirebase();
@@ -647,7 +634,7 @@
                     window.firebaseOnValue(connectedRef, (snapshot) => {
                         connectionStatus = snapshot.val() === true;
                         updateConnectionStatus();
-                        
+
                         if (connectionStatus) {
                             console.log('✅ Firebase connected!');
                         } else {
@@ -667,7 +654,7 @@
         function updateConnectionStatus() {
             const statusElement = document.getElementById('connection-status');
             const statusText = document.getElementById('status-text');
-            
+
             if (connectionStatus) {
                 statusElement.className = 'connection-status show connected';
                 statusText.innerHTML = '<i class="fas fa-check-circle"></i> Firebase connected';
@@ -675,7 +662,7 @@
                 statusElement.className = 'connection-status show disconnected';
                 statusText.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Firebase not connected';
             }
-            
+
             if (connectionStatus) {
                 setTimeout(() => {
                     statusElement.classList.remove('show');
@@ -708,23 +695,23 @@
         async function handleFormSubmit(e) {
             e.preventDefault();
             console.log('📝 Form submitted, processing...');
-            
+
             const submitBtn = document.getElementById('submit-btn');
             const originalText = submitBtn.innerHTML;
-            
+
             try {
                 const title = document.getElementById('news-title').value.trim();
                 const category = document.getElementById('news-category').value;
                 const author = document.getElementById('news-author').value.trim();
                 const content = document.getElementById('news-content').value.trim();
-                
+
                 console.log('📊 Form data:', { title, category, author, content: content.substring(0, 50) + '...' });
-                
+
                 if (!title || !category || !author || !content) {
                     showMessage('❌ All fields must be filled out!', 'error');
                     return;
                 }
-                
+
                 if (content.length < 50) {
                     showMessage('❌ Content must be at least 50 characters long!', 'error');
                     return;
@@ -749,8 +736,8 @@
 
                 console.log('✅ Successfully published to Firebase');
 
-                showMessage('✅ News has been published!', 'success');
-                
+                showMessage('✅ Article has been published successfully!', 'success');
+
                 const newsForm = document.getElementById('news-form');
                 if (newsForm) {
                     newsForm.reset();
@@ -758,11 +745,11 @@
                 } else {
                     console.error('❌ Could not find form to reset');
                 }
-                
+
                 loadNewsList();
 
             } catch (error) {
-                console.error('❌ Error publishing news:', error);
+                console.error('❌ Error publishing article:', error);
                 showMessage('❌ Publishing error: ' + error.message, 'error');
             } finally {
                 submitBtn.disabled = false;
@@ -773,7 +760,7 @@
         function loadNewsList() {
             try {
                 const newsRef = window.firebaseRef(window.firebaseDatabase, 'news');
-                
+
                 window.firebaseOnValue(newsRef, (snapshot) => {
                     const data = snapshot.val();
                     displayNewsList(data);
@@ -783,7 +770,7 @@
                     document.getElementById('news-list').innerHTML = `
                         <div class="empty-state">
                             <i class="fas fa-exclamation-triangle"></i>
-                            <h3>Could not load news</h3>
+                            <h3>Could not load articles</h3>
                             <p>Check Firebase connection and try again.</p>
                         </div>
                     `;
@@ -796,13 +783,13 @@
 
         function displayNewsList(newsData) {
             const container = document.getElementById('news-list');
-            
+
             if (!newsData) {
                 container.innerHTML = `
                     <div class="empty-state">
                         <i class="far fa-newspaper"></i>
-                        <h3>No news published yet</h3>
-                        <p>Use the form on the left to publish the first news.</p>
+                        <h3>No articles published yet</h3>
+                        <p>Use the form on the left to publish the first article.</p>
                     </div>
                 `;
                 return;
@@ -829,7 +816,7 @@
                         <button class="edit-btn" onclick="editNews('${news.id}')">
                             <i class="fas fa-edit"></i> Edit
                         </button>
-                        <button class="delete-btn" onclick="deleteNews('${news.id}', '${news.title.replace(/'/g, "\\'")}')">
+                        <button class="delete-btn" onclick="deleteNews('${news.id}', '${news.title.replace(/'/g, "\'")}')">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
@@ -873,23 +860,23 @@
         }
 
         async function deleteNews(newsId, newsTitle) {
-            if (!confirm(`Are you sure you want to delete the news "${newsTitle}"?`)) {
+            if (!confirm(`Are you sure you want to delete the article "${newsTitle}"?`)) {
                 return;
             }
 
             try {
                 const newsRef = window.firebaseRef(window.firebaseDatabase, `news/${newsId}`);
                 await window.firebaseRemove(newsRef);
-                showMessage('✅ News has been deleted!', 'success');
+                showMessage('✅ Article has been deleted successfully!', 'success');
                 loadNewsList();
             } catch (error) {
-                console.error('Error deleting news:', error);
+                console.error('Error deleting article:', error);
                 showMessage('❌ Deletion error: ' + error.message, 'error');
             }
         }
 
         function editNews(newsId) {
-            alert('Edit function coming in next version! 🚧\\n\\nFor now you can delete and create new.');
+            alert('Edit function coming in next version! 🚧\n\nFor now you can delete and create new article.');
         }
 
         function showMessage(text, type) {
@@ -900,10 +887,10 @@
                 <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
                 ${text}
             `;
-            
+
             container.innerHTML = '';
             container.appendChild(message);
-            
+
             setTimeout(() => {
                 if (message.parentNode) {
                     message.parentNode.removeChild(message);
@@ -919,11 +906,11 @@
             const hours = Math.floor(minutes / 60);
             const days = Math.floor(hours / 24);
 
-            if (minutes < 1) return 'Now';
+            if (minutes < 1) return 'Just now';
             if (minutes < 60) return `${minutes} min ago`;
             if (hours < 24) return `${hours} hours ago`;
             if (days < 7) return `${days} days ago`;
-            
+
             return date.toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
@@ -933,18 +920,18 @@
 
         console.log(`
     ╔══════════════════════════════════════════════════════╗
-    ║                ADMIN PANEL v2.1 ENGLISH             ║
-    ║           Oslo Technical School - SchoolConnect      ║
+    ║                ADMIN PANEL v2.2 ENGLISH             ║
+    ║           Gjermundnes vidaregåande skule - SchoolConnect      ║
     ║                                                      ║
-    ║  🔧 Manage school news                               ║
-    ║  📝 Publish new articles                             ║
+    ║  🔧 Manage school news and articles                  ║
+    ║  📝 Publish new content                              ║
     ║  📊 View statistics and analytics                    ║
     ║  🔥 Real-time Firebase integration                   ║
     ║  📡 Live connection status                           ║
-    ║  ✅ Form reset bug FIXED                             ║
+    ║  ✅ Enhanced English interface                       ║
     ║                                                      ║
     ║  🇺🇸 Made for international schools                   ║
-    ║  ⚪ White minimalist design                          ║
+    ║  ⚪ Clean minimalist design                          ║
     ╚══════════════════════════════════════════════════════╝
         `);
     </script>
